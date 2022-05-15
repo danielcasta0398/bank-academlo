@@ -1,8 +1,13 @@
 const globalErrorHandler = ( error, req, res, next ) => {
     
-    res.status(500).json({ 
-        status: 'error',
-        error
+    const statusCode = error.statusCode || 500;
+    const status = error.status || 'fail';
+
+    res.status(statusCode).json({ 
+        status,        
+        message : error.message,
+        error,
+        stack: error.stack
      })
 } 
 

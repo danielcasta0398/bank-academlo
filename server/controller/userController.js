@@ -1,11 +1,12 @@
 const { User } = require("../model/userModel");
+const { catchAsync } = require("../utils/cathAsync");
 
 
-const getUsers = async (req,res) =>{
+const getUsers = catchAsync (async (req,res, next) =>{
     const users = await User.findAll()
 
     res.status(200).json({users})
-}
+});
 
 const createUser = async (req,res) =>{
     const { name,password, } = req.body;    
@@ -21,5 +22,6 @@ const createUser = async (req,res) =>{
 
     res.status(200).json({ newUser })
 }
+
 
 module.exports = { createUser, getUsers }
